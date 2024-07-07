@@ -1,102 +1,162 @@
-import Ionicons from '@expo/vector-icons/Ionicons';
-import { StyleSheet, Image, Platform } from 'react-native';
+import Ionicons from "@expo/vector-icons/Ionicons";
+import {
+	StyleSheet,
+	Image,
+	Platform,
+	View,
+	Text,
+	ScrollView,
+} from "react-native";
 
-import { Collapsible } from '@/components/Collapsible';
-import { ExternalLink } from '@/components/ExternalLink';
-import ParallaxScrollView from '@/components/ParallaxScrollView';
-import { ThemedText } from '@/components/ThemedText';
-import { ThemedView } from '@/components/ThemedView';
+import { Collapsible } from "@/components/Collapsible";
+import { ExternalLink } from "@/components/ExternalLink";
+import ParallaxScrollView from "@/components/ParallaxScrollView";
+import { ThemedText } from "@/components/ThemedText";
+import { ThemedView } from "@/components/ThemedView";
+import { SafeAreaView } from "react-native-safe-area-context";
+import { Button, FAB, Searchbar, Switch, TextInput } from "react-native-paper";
+import { useState } from "react";
+import { AntDesign } from "@expo/vector-icons";
+import { Fontisto } from "@expo/vector-icons";
+import Category from "@/components/Category";
 
 export default function TabTwoScreen() {
-  return (
-    <ParallaxScrollView
-      headerBackgroundColor={{ light: '#D0D0D0', dark: '#353636' }}
-      headerImage={<Ionicons size={310} name="code-slash" style={styles.headerImage} />}>
-      <ThemedView style={styles.titleContainer}>
-        <ThemedText type="title">Explore</ThemedText>
-      </ThemedView>
-      <ThemedText>This app includes example code to help you get started.</ThemedText>
-      <Collapsible title="File-based routing">
-        <ThemedText>
-          This app has two screens:{' '}
-          <ThemedText type="defaultSemiBold">app/(tabs)/index.tsx</ThemedText> and{' '}
-          <ThemedText type="defaultSemiBold">app/(tabs)/explore.tsx</ThemedText>
-        </ThemedText>
-        <ThemedText>
-          The layout file in <ThemedText type="defaultSemiBold">app/(tabs)/_layout.tsx</ThemedText>{' '}
-          sets up the tab navigator.
-        </ThemedText>
-        <ExternalLink href="https://docs.expo.dev/router/introduction">
-          <ThemedText type="link">Learn more</ThemedText>
-        </ExternalLink>
-      </Collapsible>
-      <Collapsible title="Android, iOS, and web support">
-        <ThemedText>
-          You can open this project on Android, iOS, and the web. To open the web version, press{' '}
-          <ThemedText type="defaultSemiBold">w</ThemedText> in the terminal running this project.
-        </ThemedText>
-      </Collapsible>
-      <Collapsible title="Images">
-        <ThemedText>
-          For static images, you can use the <ThemedText type="defaultSemiBold">@2x</ThemedText> and{' '}
-          <ThemedText type="defaultSemiBold">@3x</ThemedText> suffixes to provide files for
-          different screen densities
-        </ThemedText>
-        <Image source={require('@/assets/images/react-logo.png')} style={{ alignSelf: 'center' }} />
-        <ExternalLink href="https://reactnative.dev/docs/images">
-          <ThemedText type="link">Learn more</ThemedText>
-        </ExternalLink>
-      </Collapsible>
-      <Collapsible title="Custom fonts">
-        <ThemedText>
-          Open <ThemedText type="defaultSemiBold">app/_layout.tsx</ThemedText> to see how to load{' '}
-          <ThemedText style={{ fontFamily: 'SpaceMono' }}>
-            custom fonts such as this one.
-          </ThemedText>
-        </ThemedText>
-        <ExternalLink href="https://docs.expo.dev/versions/latest/sdk/font">
-          <ThemedText type="link">Learn more</ThemedText>
-        </ExternalLink>
-      </Collapsible>
-      <Collapsible title="Light and dark mode components">
-        <ThemedText>
-          This template has light and dark mode support. The{' '}
-          <ThemedText type="defaultSemiBold">useColorScheme()</ThemedText> hook lets you inspect
-          what the user's current color scheme is, and so you can adjust UI colors accordingly.
-        </ThemedText>
-        <ExternalLink href="https://docs.expo.dev/develop/user-interface/color-themes/">
-          <ThemedText type="link">Learn more</ThemedText>
-        </ExternalLink>
-      </Collapsible>
-      <Collapsible title="Animations">
-        <ThemedText>
-          This template includes an example of an animated component. The{' '}
-          <ThemedText type="defaultSemiBold">components/HelloWave.tsx</ThemedText> component uses
-          the powerful <ThemedText type="defaultSemiBold">react-native-reanimated</ThemedText> library
-          to create a waving hand animation.
-        </ThemedText>
-        {Platform.select({
-          ios: (
-            <ThemedText>
-              The <ThemedText type="defaultSemiBold">components/ParallaxScrollView.tsx</ThemedText>{' '}
-              component provides a parallax effect for the header image.
-            </ThemedText>
-          ),
-        })}
-      </Collapsible>
-    </ParallaxScrollView>
-  );
-}
+	const [location, setLocation] = useState("Whitefield");
+	const [search, setSearch] = useState("");
+	const [isSwitchOn, setIsSwitchOn] = useState(false);
+	const onToggleSwitch = () => setIsSwitchOn(!isSwitchOn);
 
-const styles = StyleSheet.create({
-  headerImage: {
-    color: '#808080',
-    bottom: -90,
-    left: -35,
-    position: 'absolute',
-  },
-  titleContainer: {
-    flexDirection: 'row',
-    gap: 8,
-  },
-});
+	return (
+		<SafeAreaView className="bg-primary h-full">
+			{/* <FAB icon="search" className="absolute right-0 bottom-0 m-5" /> */}
+			<View className="flex-row justify-between items-center p-2">
+				<View className="p-4 flex-row justify-start items-center">
+					<Text className="text-white text-lg mr-2">{location}</Text>
+					<AntDesign name="caretdown" size={13} color="white" />
+				</View>
+				<Button
+					mode="outlined"
+					className="border-orange-300 rounded-lg mr-2"
+					textColor="white"
+				>
+					Suprise Me
+				</Button>
+			</View>
+			<View className="justify-center items-center mt-2">
+				<Text className="text-xl text-white font-bold">What's the plan?</Text>
+			</View>
+			<Searchbar
+				placeholder="Go Clubbing"
+				className="mt-4 mx-4 px-2"
+				value={search}
+				onChangeText={setSearch}
+			/>
+			<View className="flex-row justify-start items-center space-x-2 p-4 ml-2">
+				<Button mode="elevated" className="rounded-full w-30">
+					<Fontisto name="date" size={14} color="black" /> Date
+				</Button>
+				<Button mode="elevated" className="rounded-full w-30">
+					<AntDesign name="filter" size={14} color="black" /> Filter
+				</Button>
+				<Button mode="elevated" className="rounded-full w-30">
+					<AntDesign name="arrowdown" size={14} color="black" /> Sort
+				</Button>
+			</View>
+			<ScrollView>
+				<View className="items-start ml-5 mt-2">
+					<Text className="text-white text-xl font-bold">
+						Discover By Interest
+					</Text>
+					<View className="flex flex-row flex-wrap gap-x-3 gap-y-6 mt-0">
+						<View>
+							<Category
+								category="AW Originals"
+								imageUrl="https://images.pexels.com/photos/2541310/pexels-photo-2541310.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+							/>
+						</View>
+						<View>
+							<Category
+								category="Theatre"
+								imageUrl="https://images.pexels.com/photos/713149/pexels-photo-713149.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+							/>
+						</View>
+						<View>
+							<Category
+								category="Painting"
+								imageUrl="https://images.pexels.com/photos/1646953/pexels-photo-1646953.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+							/>
+						</View>
+						<View>
+							<Category
+								category="Dancing"
+								imageUrl="https://images.pexels.com/photos/5888633/pexels-photo-5888633.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+							/>
+						</View>
+						<View>
+							<Category
+								category="Singing"
+								imageUrl="https://images.pexels.com/photos/2531728/pexels-photo-2531728.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+							/>
+						</View>
+						<View>
+							<Category
+								category="Go Karting"
+								imageUrl="https://images.pexels.com/photos/861464/pexels-photo-861464.jpeg?auto=compress&cs=tinysrgb&w=800"
+							/>
+						</View>
+						<View>
+							<Category
+								category="Trekking"
+								imageUrl="https://images.pexels.com/photos/2450296/pexels-photo-2450296.jpeg?auto=compress&cs=tinysrgb&w=800"
+							/>
+						</View>
+						<View>
+							<Category
+								category="Clubbing"
+								imageUrl="https://images.pexels.com/photos/1587927/pexels-photo-1587927.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+							/>
+						</View>
+						<View>
+							<Category
+								category="Art Exhibitions"
+								imageUrl="https://images.pexels.com/photos/2123337/pexels-photo-2123337.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+							/>
+						</View>
+						<View>
+							<Category
+								category="Movies"
+								imageUrl="https://images.pexels.com/photos/33129/popcorn-movie-party-entertainment.jpg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+							/>
+						</View>
+						<View>
+							<Category
+								category="Reading"
+								imageUrl="https://images.pexels.com/photos/1031588/pexels-photo-1031588.jpeg?auto=compress&cs=tinysrgb&w=800"
+							/>
+						</View>
+						<View>
+							<Category
+								category="Cycling"
+								imageUrl="https://images.pexels.com/photos/248547/pexels-photo-248547.jpeg?auto=compress&cs=tinysrgb&w=800"
+							/>
+						</View>
+					</View>
+				</View>
+				<View className="flex-wrap justify-start items-center space-x-2 p-4 ml-2">
+					<Text className="text-white text-xl font-bold">
+						Events for Every Mood
+					</Text>
+				</View>
+				<View className="flex-wrap justify-start items-center space-x-2 p-4 ml-2">
+					<Text className="text-white text-xl font-bold">Map Your Journey</Text>
+				</View>
+				<View className="flex-wrap justify-start items-center space-x-2 p-4 ml-2">
+					<Text className="text-white text-xl font-bold">Upcoming Events</Text>
+				</View>
+				<View className="flex-wrap justify-start items-center space-x-2 p-4 ml-2">
+					<Text className="text-white text-xl font-bold">Meet the Hosts</Text>
+				</View>
+			</ScrollView>
+		</SafeAreaView>
+	);
+}

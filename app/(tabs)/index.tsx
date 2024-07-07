@@ -1,70 +1,216 @@
-import { Image, StyleSheet, Platform } from 'react-native';
+import { useState } from "react";
+import { Image, View, Text, ScrollView, TouchableOpacity } from "react-native";
+import { AntDesign } from "@expo/vector-icons";
 
-import { HelloWave } from '@/components/HelloWave';
-import ParallaxScrollView from '@/components/ParallaxScrollView';
-import { ThemedText } from '@/components/ThemedText';
-import { ThemedView } from '@/components/ThemedView';
+import { SafeAreaView } from "react-native-safe-area-context";
+
+import { images } from "../../constants";
+import { Button, Searchbar } from "react-native-paper";
+import EventCard from "@/components/EventCard";
+import Tile from "@/components/Tiles";
+import EventData from "../../lib/data";
 
 export default function HomeScreen() {
-  return (
-    <ParallaxScrollView
-      headerBackgroundColor={{ light: '#A1CEDC', dark: '#1D3D47' }}
-      headerImage={
-        <Image
-          source={require('@/assets/images/partial-react-logo.png')}
-          style={styles.reactLogo}
-        />
-      }>
-      <ThemedView style={styles.titleContainer}>
-        <ThemedText type="title">Welcome!</ThemedText>
-        <HelloWave />
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 1: Try it</ThemedText>
-        <ThemedText>
-          Edit <ThemedText type="defaultSemiBold">app/(tabs)/index.tsx</ThemedText> to see changes.
-          Press{' '}
-          <ThemedText type="defaultSemiBold">
-            {Platform.select({ ios: 'cmd + d', android: 'cmd + m' })}
-          </ThemedText>{' '}
-          to open developer tools.
-        </ThemedText>
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 2: Explore</ThemedText>
-        <ThemedText>
-          Tap the Explore tab to learn more about what's included in this starter app.
-        </ThemedText>
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 3: Get a fresh start</ThemedText>
-        <ThemedText>
-          When you're ready, run{' '}
-          <ThemedText type="defaultSemiBold">npm run reset-project</ThemedText> to get a fresh{' '}
-          <ThemedText type="defaultSemiBold">app</ThemedText> directory. This will move the current{' '}
-          <ThemedText type="defaultSemiBold">app</ThemedText> to{' '}
-          <ThemedText type="defaultSemiBold">app-example</ThemedText>.
-        </ThemedText>
-      </ThemedView>
-    </ParallaxScrollView>
-  );
-}
+	const [location, setLocation] = useState("Whitefield");
+	const [time, setTime] = useState("Now");
+	const [search, setSearch] = useState("");
+	return (
+		<SafeAreaView className="bg-primary h-full">
+			<ScrollView>
+				<View className="flex-row justify-between items-center p-2">
+					<View className="p-4 flex-row justify-start items-center">
+						<Text className="text-white text-lg mr-2">{location}</Text>
+						<AntDesign name="caretdown" size={13} color="white" />
+					</View>
+					{/* <IconButton
+						icon="person-outline"
+						size={22}
+						className="mr-2 bg-gray-200"
+					/> */}
+					<View className="mr-4">
+						<Image
+							source={{
+								uri: "https://media.licdn.com/dms/image/D5603AQGO4R0xvBV4FA/profile-displayphoto-shrink_200_200/0/1693730389404?e=2147483647&v=beta&t=uRuNCpv50EcGrtraIK-98WZ4pzYQ83n1L_1RDHEOCOs",
+							}}
+							className="h-12 w-12 rounded-full"
+						/>
+					</View>
+				</View>
+				<Searchbar
+					placeholder="Search for events"
+					className="mt-1 px-2 mx-4"
+					value={search}
+					onChangeText={setSearch}
+					right={(props) => (
+						<Button mode="contained" className="rounded-full bg-gray-300">
+							<AntDesign name="filter" size={16} color="black" />
+						</Button>
+					)}
+				/>
+				<View className="mt-4 p-4">
+					<Text className="text-white text-xl font-bold">Just For You</Text>
+					<ScrollView
+						horizontal={true}
+						className="mt-4"
+						showsHorizontalScrollIndicator={false}
+						contentContainerStyle={{ justifyContent: "space-evenly", gap: 20 }}
+					>
+						<EventCard
+							imageUrl="https://www.billboard.com/wp-content/uploads/2023/06/Fred-again-2022-live-billboard-1548.jpg?w=942&h=623&crop=1"
+							title="Fred Again Tour"
+							location="Whitefield"
+							price="4,999+"
+							date="23-26 Aug"
+						/>
+						<EventCard
+							imageUrl="https://i0.wp.com/www.salsavida.com/wp-content/uploads/2023/01/latin-dancers-tango.jpg?fit=2000%2C1418&ssl=1"
+							title="Salsa Workshop"
+							location="Indiranagar"
+							price="999+"
+							date="5th Aug"
+						/>
+						<EventCard
+							imageUrl="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRQNHc2aWMD3CsBX0Cm3PoGSF_7SJHLEbZ5XA&s"
+							title="Yoga Retreat"
+							location="JP Nagar"
+							price="399"
+							date="21st Aug"
+						/>
+					</ScrollView>
+				</View>
 
-const styles = StyleSheet.create({
-  titleContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 8,
-  },
-  stepContainer: {
-    gap: 8,
-    marginBottom: 8,
-  },
-  reactLogo: {
-    height: 178,
-    width: 290,
-    bottom: 0,
-    left: 0,
-    position: 'absolute',
-  },
-});
+				<View className="p-4">
+					<Text className="text-white text-xl font-bold">
+						Top Picks in {location}
+					</Text>
+					<ScrollView
+						horizontal={true}
+						className="mt-4"
+						showsHorizontalScrollIndicator={false}
+						contentContainerStyle={{ justifyContent: "space-evenly", gap: 5 }}
+					>
+						<Tile
+							title="Martin Garrix India Tour"
+							imageUrl="https://images.indianexpress.com/2023/03/martin-garrix.jpg"
+							number={1}
+						/>
+						<Tile
+							title="Formula 1 Exhibition"
+							imageUrl="https://img.freepik.com/premium-photo/f1-cars-futuristic-city-night-race-with-tire-smoke-sparks-with-futuristic-tall-buildings_952056-191.jpg"
+							number={2}
+						/>
+						<Tile
+							title="Trevor Noah Stand Up"
+							imageUrl="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSkC9a9mZGJvcvFlXXR9VutCVx4TJGeVHuh4A&s"
+							number={3}
+						/>
+					</ScrollView>
+				</View>
+
+				<View className="p-4">
+					<View className="flex-row justify-between mx-2 items-center">
+						<Text className="text-white text-xl font-bold">
+							Happening Today
+						</Text>
+						<TouchableOpacity className="rounded-full bg-white p-2">
+							<AntDesign name="arrowright" size={20} color="black" />
+						</TouchableOpacity>
+					</View>
+					<ScrollView
+						horizontal={true}
+						className="mt-4"
+						showsHorizontalScrollIndicator={false}
+						contentContainerStyle={{ justifyContent: "space-evenly", gap: 20 }}
+					>
+						{/* <EventCard
+							imageUrl="https://assets-in.bmscdn.com/discovery-catalog/events/tr:w-400,h-600,bg-CCCCCC/et00394655-qasmlqbrtc-portrait.jpg"
+							title="Single's Meetup"
+							location="Church Street"
+							price="199+"
+							date="5th Aug"
+						/>
+						<EventCard
+							imageUrl="https://i0.wp.com/www.salsavida.com/wp-content/uploads/2023/01/latin-dancers-tango.jpg?fit=2000%2C1418&ssl=1"
+							title="Salsa Workshop"
+							location="Indiranagar"
+							price="999+"
+							date="5th Aug"
+						/>
+						<EventCard
+							imageUrl="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRQNHc2aWMD3CsBX0Cm3PoGSF_7SJHLEbZ5XA&s"
+							title="Yoga Retreat"
+							location="JP Nagar"
+							price="399"
+							date="5th Aug"
+						/> */}
+						{EventData.map((event: JSON, index: number) =>
+							event["display_section"] === "day" ? (
+								<EventCard
+									key={index}
+									imageUrl={event["small_image"]}
+									title={event["title"]}
+									location={event["venue"]["name"]}
+									date={event["event_date"]}
+									bookingUrl={event["shortened_link"]}
+								/>
+							) : (
+								<></>
+							)
+						)}
+					</ScrollView>
+				</View>
+
+				<View className="p-4">
+					<View className="flex-row justify-between mx-2 items-center">
+						<Text className="text-white text-xl font-bold">This Week</Text>
+						<TouchableOpacity className="rounded-full bg-white p-2">
+							<AntDesign name="arrowright" size={20} color="black" />
+						</TouchableOpacity>
+					</View>
+					<ScrollView
+						horizontal={true}
+						className="mt-4"
+						showsHorizontalScrollIndicator={false}
+						contentContainerStyle={{ justifyContent: "space-evenly", gap: 20 }}
+					>
+						{/* <EventCard
+							imageUrl="https://eventserica.com/wp-content/uploads/2023/12/Savandurga-4.jpeg"
+							title="Kunti Beta Trek"
+							location="Multiple Locations"
+							price="1,999"
+							date="13th Aug"
+						/>
+						<EventCard
+							imageUrl="https://i0.wp.com/www.salsavida.com/wp-content/uploads/2023/01/latin-dancers-tango.jpg?fit=2000%2C1418&ssl=1"
+							title="Salsa Workshop"
+							location="Indiranagar"
+							price="999+"
+							date="18th Aug"
+						/>
+						<EventCard
+							imageUrl="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRQNHc2aWMD3CsBX0Cm3PoGSF_7SJHLEbZ5XA&s"
+							title="Yoga Retreat"
+							location="JP Nagar"
+							price="399"
+							date="21st Aug"
+						/> */}
+						{EventData.map((event: JSON, index: number) =>
+							event["display_section"] === "later" ? (
+								<EventCard
+									key={index + 100}
+									imageUrl={event["small_image"]}
+									title={event["title"]}
+									location={event["venue"]["name"]}
+									date={event["event_date"]}
+									bookingUrl={event["shortened_link"]}
+								/>
+							) : (
+								<></>
+							)
+						)}
+					</ScrollView>
+				</View>
+			</ScrollView>
+		</SafeAreaView>
+	);
+}
