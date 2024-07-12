@@ -3,8 +3,8 @@ import { View, Text, TouchableOpacity, FlatList } from "react-native";
 
 interface CustomDropdownProps {
 	options: Array<string>;
-	selectedOption?: string;
-	onSelect: any;
+	selectedOption: string;
+	onSelect: (option: string) => void;
 }
 
 const CustomDropdown: React.FC<CustomDropdownProps> = ({
@@ -20,7 +20,7 @@ const CustomDropdown: React.FC<CustomDropdownProps> = ({
 	};
 
 	return (
-		<View className="w-full border border-gray-300 rounded">
+		<View className="border border-gray-300 rounded">
 			<TouchableOpacity
 				className="p-4 bg-white"
 				onPress={() => setIsDropdownOpen(!isDropdownOpen)}
