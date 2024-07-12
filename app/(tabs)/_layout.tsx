@@ -12,7 +12,7 @@ export default function TabLayout() {
 	return (
 		<PaperProvider
 			settings={{
-				icon: (props) => <Ionicons {...props} />,
+				icon: (props: any) => <Ionicons {...props} />,
 			}}
 		>
 			<Tabs
@@ -49,7 +49,7 @@ export default function TabLayout() {
 					}}
 				/>
 				<Tabs.Screen
-					name="createEvent"
+					name="(createEvent)"
 					options={{
 						title: "Create",
 						headerShown: false,

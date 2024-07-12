@@ -1,4 +1,4 @@
-export default EventData = [
+const EventData = [
   {
       "id": 1319,
       "experience_id": 1319,
@@ -504,3 +504,5 @@ export default EventData = [
       }
   }
 ];
+
+export default EventData;
