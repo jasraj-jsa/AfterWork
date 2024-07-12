@@ -22,11 +22,6 @@ export default function HomeScreen() {
 						<Text className="text-white text-lg mr-2">{location}</Text>
 						<AntDesign name="caretdown" size={13} color="white" />
 					</View>
-					{/* <IconButton
-						icon="person-outline"
-						size={22}
-						className="mr-2 bg-gray-200"
-					/> */}
 					<View className="mr-4">
 						<Image
 							source={{
@@ -122,28 +117,7 @@ export default function HomeScreen() {
 						showsHorizontalScrollIndicator={false}
 						contentContainerStyle={{ justifyContent: "space-evenly", gap: 20 }}
 					>
-						{/* <EventCard
-							imageUrl="https://assets-in.bmscdn.com/discovery-catalog/events/tr:w-400,h-600,bg-CCCCCC/et00394655-qasmlqbrtc-portrait.jpg"
-							title="Single's Meetup"
-							location="Church Street"
-							price="199+"
-							date="5th Aug"
-						/>
-						<EventCard
-							imageUrl="https://i0.wp.com/www.salsavida.com/wp-content/uploads/2023/01/latin-dancers-tango.jpg?fit=2000%2C1418&ssl=1"
-							title="Salsa Workshop"
-							location="Indiranagar"
-							price="999+"
-							date="5th Aug"
-						/>
-						<EventCard
-							imageUrl="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRQNHc2aWMD3CsBX0Cm3PoGSF_7SJHLEbZ5XA&s"
-							title="Yoga Retreat"
-							location="JP Nagar"
-							price="399"
-							date="5th Aug"
-						/> */}
-						{EventData.map((event: JSON, index: number) =>
+						{EventData.map((event, index) =>
 							event["display_section"] === "day" ? (
 								<EventCard
 									key={index}
@@ -153,9 +127,7 @@ export default function HomeScreen() {
 									date={event["event_date"]}
 									bookingUrl={event["shortened_link"]}
 								/>
-							) : (
-								<></>
-							)
+							) : null
 						)}
 					</ScrollView>
 				</View>
@@ -173,40 +145,17 @@ export default function HomeScreen() {
 						showsHorizontalScrollIndicator={false}
 						contentContainerStyle={{ justifyContent: "space-evenly", gap: 20 }}
 					>
-						{/* <EventCard
-							imageUrl="https://eventserica.com/wp-content/uploads/2023/12/Savandurga-4.jpeg"
-							title="Kunti Beta Trek"
-							location="Multiple Locations"
-							price="1,999"
-							date="13th Aug"
-						/>
-						<EventCard
-							imageUrl="https://i0.wp.com/www.salsavida.com/wp-content/uploads/2023/01/latin-dancers-tango.jpg?fit=2000%2C1418&ssl=1"
-							title="Salsa Workshop"
-							location="Indiranagar"
-							price="999+"
-							date="18th Aug"
-						/>
-						<EventCard
-							imageUrl="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRQNHc2aWMD3CsBX0Cm3PoGSF_7SJHLEbZ5XA&s"
-							title="Yoga Retreat"
-							location="JP Nagar"
-							price="399"
-							date="21st Aug"
-						/> */}
-						{EventData.map((event: JSON, index: number) =>
+						{EventData.map((event, index) =>
 							event["display_section"] === "later" ? (
 								<EventCard
-									key={index + 100}
+									key={index}
 									imageUrl={event["small_image"]}
 									title={event["title"]}
 									location={event["venue"]["name"]}
 									date={event["event_date"]}
 									bookingUrl={event["shortened_link"]}
 								/>
-							) : (
-								<></>
-							)
+							) : null
 						)}
 					</ScrollView>
 				</View>

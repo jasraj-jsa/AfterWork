@@ -20,9 +20,11 @@ const EventCard: React.FC<EventCardProps> = ({
 	bookingUrl,
 }) => {
 	const handlePress = () => {
-		Linking.openURL(bookingUrl).catch((err) =>
-			console.error("An error occurred", err)
-		);
+		bookingUrl
+			? Linking.openURL(bookingUrl).catch((err) =>
+					console.error("An error occurred", err)
+			  )
+			: null;
 	};
 	return (
 		<TouchableOpacity
