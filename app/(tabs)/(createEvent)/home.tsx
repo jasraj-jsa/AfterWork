@@ -8,6 +8,7 @@ import {
 } from "react-native";
 import React from "react";
 import { router } from "expo-router";
+import { Entypo, FontAwesome6, Octicons } from "@expo/vector-icons";
 
 const Home = () => {
 	const getStarted = () => router.push("details");
@@ -17,47 +18,47 @@ const Home = () => {
 				<Text className="text-white text-2xl font-bold">
 					Bring Your Events to Life!
 				</Text>
-				<Text className="text-gray-300 text-lg mt-2">
+				<Text className="text-gray-300 text-base">
 					Craft Memorable Experiences Effortlessly.
 				</Text>
 				<Image
-					source={{
-						uri: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT5EBGwzlILYoKG8k0mDAQOC-EebqlscsRcFA&s",
-					}}
-					className="w-[360px] h-[310px] mt-4 rounded-2xl"
+					source={require("@/assets/images/experiences.jpg")}
+					className="w-[360px] h-[250px] mt-4 rounded-2xl"
 					style={{ resizeMode: "cover" }}
 				/>
 				<TouchableOpacity
-					className="mt-4 rounded-full bg-blue-900 p-4 min-w-full flex-row items-center justify-center"
+					className="mt-6 rounded-full bg-blue-900 p-4 min-w-full flex-row items-center justify-center"
 					onPress={getStarted}
 				>
-					<Text className="text-white text-lg font-semibold">Get Started</Text>
+					<Text className="text-white text-xl font-semibold">Get Started</Text>
 				</TouchableOpacity>
-				<View className="mt-6 items-center">
-					<Text className="text-white text-lg font-bold">
-						Benefits of Using Afterwork
-					</Text>
-					<View className="mt-2">
-						<Text className="text-white text-base">
-							1. Reach Your Audience: Tap into a vibrant community eager to
-							discover new experiences.
-						</Text>
-						<Text className="text-white text-base mt-2">
-							2. Easy Management: Simple and intuitive event management tools at
-							your fingertips.
-						</Text>
-						<Text className="text-white text-base mt-2">
-							3. Promotion: Get featured in our top events and reach a wider
-							audience.
-						</Text>
-						<Text className="text-white text-base mt-2">
-							4. Secure Payments: Seamlessly manage ticket sales and payments
-							with our secure platform.
-						</Text>
-						<Text className="text-white text-base mt-2">
-							5. Real-Time Updates: Keep your attendees informed with real-time
-							notifications and updates.
-						</Text>
+				<View className="mt-8 items-center">
+					<Text className="text-white text-xl font-bold">Why Afterwork?</Text>
+					<View className="mt-4 space-y-8">
+						<View className=" bg-[#F5F5F5] rounded-xl py-8 px-4 space-y-4 justify-center items-center">
+							<Entypo name="modern-mic" size={40} color="#37474F" />
+							<Text className="text-[#37474F] text-base font-medium">
+								Reach a Broader Audience
+							</Text>
+						</View>
+						<View className="bg-[#F5F5F5] rounded-xl py-8 px-4 space-y-4 justify-center items-center">
+							<Octicons name="checklist" size={40} color="#37474F" />
+							<Text className="text-[#37474F] text-base font-medium">
+								Effortless Event Management
+							</Text>
+						</View>
+						<View className="bg-[#F5F5F5] rounded-xl py-8 px-4 space-y-4 justify-center items-center">
+							<FontAwesome6 name="users" size={40} color="#37474F" />
+							<Text className="text-[#37474F] text-base font-medium">
+								Boost Attendee Engagement
+							</Text>
+						</View>
+						<View className="bg-[#F5F5F5] rounded-xl py-8 px-4 space-y-4 justify-center items-center">
+							<FontAwesome6 name="paintbrush" size={40} color="#37474F" />
+							<Text className="text-[#37474F] text-base font-medium">
+								Tailor Your Event Experience
+							</Text>
+						</View>
 					</View>
 				</View>
 			</ScrollView>
