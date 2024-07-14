@@ -35,27 +35,27 @@ const Home = () => {
 				<View className="mt-8 items-center">
 					<Text className="text-white text-xl font-bold">Why Afterwork?</Text>
 					<View className="mt-4 space-y-8">
-						<View className=" bg-[#F5F5F5] rounded-xl py-8 px-4 space-y-4 justify-center items-center">
-							<Entypo name="modern-mic" size={40} color="#37474F" />
-							<Text className="text-[#37474F] text-base font-medium">
+						<View className=" bg-[#1f2f5e] rounded-xl py-8 px-4 space-y-4 justify-center items-center">
+							<Entypo name="modern-mic" size={40} color="white" />
+							<Text className="text-white text-base font-medium">
 								Reach a Broader Audience
 							</Text>
 						</View>
-						<View className="bg-[#F5F5F5] rounded-xl py-8 px-4 space-y-4 justify-center items-center">
-							<Octicons name="checklist" size={40} color="#37474F" />
-							<Text className="text-[#37474F] text-base font-medium">
+						<View className="bg-[#1f2f5e] rounded-xl py-8 px-4 space-y-4 justify-center items-center">
+							<Octicons name="checklist" size={40} color="white" />
+							<Text className="text-white text-base font-medium">
 								Effortless Event Management
 							</Text>
 						</View>
-						<View className="bg-[#F5F5F5] rounded-xl py-8 px-4 space-y-4 justify-center items-center">
-							<FontAwesome6 name="users" size={40} color="#37474F" />
-							<Text className="text-[#37474F] text-base font-medium">
+						<View className="bg-[#1f2f5e] rounded-xl py-8 px-4 space-y-4 justify-center items-center">
+							<FontAwesome6 name="users" size={40} color="white" />
+							<Text className="text-white text-base font-medium">
 								Boost Attendee Engagement
 							</Text>
 						</View>
-						<View className="bg-[#F5F5F5] rounded-xl py-8 px-4 space-y-4 justify-center items-center">
-							<FontAwesome6 name="paintbrush" size={40} color="#37474F" />
-							<Text className="text-[#37474F] text-base font-medium">
+						<View className="bg-[#1f2f5e] rounded-xl py-8 px-4 space-y-4 justify-center items-center">
+							<FontAwesome6 name="paintbrush" size={40} color="white" />
+							<Text className="text-white text-base font-medium">
 								Tailor Your Event Experience
 							</Text>
 						</View>
