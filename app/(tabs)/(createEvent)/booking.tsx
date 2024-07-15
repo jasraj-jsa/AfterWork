@@ -10,6 +10,8 @@ import { Ionicons } from "@expo/vector-icons";
 import { router } from "expo-router";
 import FormComponent from "@/components/FormComponent";
 import CustomRadioButton from "@/components/CustomRadioButton";
+import FormProgress from "@/components/FormProgress";
+import formSections from "@/constants/createEventSections";
 
 const booking = () => {
 	const priceTypes = ["Fixed", "Onwards"];
@@ -31,10 +33,15 @@ const booking = () => {
 					</Text>
 				</TouchableOpacity>
 
-				<Text className="text-xl text-white font-bold">
-					Booking Information
+				<Text className="text-xl p-2 text-white font-bold">
+					How Can People Join?
 				</Text>
 			</View>
+			<FormProgress
+				sections={formSections}
+				selectedSectionPosition={3}
+				mainStyles="mx-2 my-3"
+			/>
 			<ScrollView contentContainerStyle={{ padding: 20 }}>
 				<FormComponent label="Booking Link" inputType="url" />
 				<View className="flex-row items-center">

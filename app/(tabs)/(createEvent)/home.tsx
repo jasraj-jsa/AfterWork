@@ -6,7 +6,7 @@ import {
 	TouchableOpacity,
 	Image,
 } from "react-native";
-import React from "react";
+import React, { useState } from "react";
 import { router } from "expo-router";
 import { Entypo, FontAwesome6, Octicons } from "@expo/vector-icons";
 

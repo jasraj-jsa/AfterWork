@@ -4,6 +4,8 @@ import React, { useState } from "react";
 import FormComponent from "@/components/FormComponent";
 import { router } from "expo-router";
 import { Ionicons } from "@expo/vector-icons";
+import formSections from "@/constants/createEventSections";
+import FormProgress from "@/components/FormProgress";
 
 const details = () => {
 	const handleNext = () => router.push("/locationAndDate");
@@ -20,8 +22,15 @@ const details = () => {
 						<Ionicons name="arrow-back" size={24} color="white" />
 					</Text>
 				</TouchableOpacity>
-				<Text className="text-xl text-white p-2 font-bold">Event Details</Text>
+				<Text className="text-xl text-white p-2 font-bold">
+					What's Your Event About?
+				</Text>
 			</View>
+			<FormProgress
+				sections={formSections}
+				selectedSectionPosition={1}
+				mainStyles="mx-2 my-3"
+			/>
 			<ScrollView contentContainerStyle={{ padding: 20 }}>
 				<FormComponent
 					label={"Event Title"}

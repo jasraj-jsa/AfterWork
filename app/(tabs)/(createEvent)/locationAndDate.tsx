@@ -13,6 +13,8 @@ import FormComponent from "@/components/FormComponent";
 import RNDateTimePicker from "@react-native-community/datetimepicker";
 import { RadioButton } from "react-native-paper";
 import CustomRadioButton from "@/components/CustomRadioButton";
+import FormProgress from "@/components/FormProgress";
+import formSections from "@/constants/createEventSections";
 
 const locationAndDate = () => {
 	const handleNext = () => router.push("/booking");
@@ -35,8 +37,15 @@ const locationAndDate = () => {
 					</Text>
 				</TouchableOpacity>
 
-				<Text className="text-xl text-white font-bold">Date & Venue</Text>
+				<Text className="text-xl text-white p-2 font-bold">
+					When and Where?
+				</Text>
 			</View>
+			<FormProgress
+				sections={formSections}
+				selectedSectionPosition={2}
+				mainStyles="mx-2 my-3"
+			/>
 			<ScrollView contentContainerStyle={{ padding: 20 }}>
 				<View>
 					<Text className="text-white font-semibold mb-2">Location</Text>
