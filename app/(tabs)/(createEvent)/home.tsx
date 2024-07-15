@@ -27,10 +27,11 @@ const Home = () => {
 					style={{ resizeMode: "cover" }}
 				/>
 				<TouchableOpacity
-					className="mt-6 rounded-full bg-blue-900 p-4 min-w-full flex-row items-center justify-center"
+					className="mt-6 rounded-full bg-blue-500 p-4 min-w-full flex-row items-center justify-center"
 					onPress={getStarted}
+					activeOpacity={0.7}
 				>
-					<Text className="text-white text-xl font-semibold">Get Started</Text>
+					<Text className="text-white text-lg font-psemibold">Get Started</Text>
 				</TouchableOpacity>
 				<View className="mt-8 items-center">
 					<Text className="text-white text-xl font-bold">Why Afterwork?</Text>

@@ -29,6 +29,7 @@ const locationAndDate = () => {
 		<SafeAreaView className="bg-primary h-full">
 			<View className="flex-row justify-center items-center space-x-3 ml-2 my-4">
 				<TouchableOpacity
+					activeOpacity={0.7}
 					className="rounded-full p-2 bg-blue-900 float-left absolute left-0"
 					onPress={goBack}
 				>
@@ -84,12 +85,14 @@ const locationAndDate = () => {
 				/>
 				<View className="flex-row justify-end items-center space-x-3 mt-3">
 					<TouchableOpacity
+						activeOpacity={0.7}
 						className="border border-blue-700 rounded-lg py-3 px-4"
 						onPress={handleCancel}
 					>
 						<Text className="text-white text-sm font-semibold">Cancel</Text>
 					</TouchableOpacity>
 					<TouchableOpacity
+						activeOpacity={0.7}
 						className="border rounded-lg bg-blue-700 py-3 px-6"
 						onPress={handleNext}
 					>

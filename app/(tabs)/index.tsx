@@ -4,15 +4,13 @@ import { AntDesign } from "@expo/vector-icons";
 
 import { SafeAreaView } from "react-native-safe-area-context";
 
-import { images } from "../../constants";
 import { Button, Searchbar } from "react-native-paper";
 import EventCard from "@/components/EventCard";
 import Tile from "@/components/Tiles";
-import EventData from "../../lib/data";
+import EventData from "@/lib/data";
 
 export default function HomeScreen() {
 	const [location, setLocation] = useState("Whitefield");
-	const [time, setTime] = useState("Now");
 	const [search, setSearch] = useState("");
 	return (
 		<SafeAreaView className="bg-primary h-full">
@@ -107,7 +105,10 @@ export default function HomeScreen() {
 						<Text className="text-white text-xl font-bold">
 							Happening Today
 						</Text>
-						<TouchableOpacity className="rounded-full bg-white p-2">
+						<TouchableOpacity
+							activeOpacity={0.7}
+							className="rounded-full bg-white p-2"
+						>
 							<AntDesign name="arrowright" size={20} color="black" />
 						</TouchableOpacity>
 					</View>
@@ -135,7 +136,10 @@ export default function HomeScreen() {
 				<View className="p-4">
 					<View className="flex-row justify-between mx-2 items-center">
 						<Text className="text-white text-xl font-bold">This Week</Text>
-						<TouchableOpacity className="rounded-full bg-white p-2">
+						<TouchableOpacity
+							activeOpacity={0.7}
+							className="rounded-full bg-white p-2"
+						>
 							<AntDesign name="arrowright" size={20} color="black" />
 						</TouchableOpacity>
 					</View>

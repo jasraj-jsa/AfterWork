@@ -5,6 +5,7 @@ import { TabBarIcon } from "@/components/navigation/TabBarIcon";
 import { useColorScheme } from "@/hooks/useColorScheme";
 import { PaperProvider } from "react-native-paper";
 import { Ionicons } from "@expo/vector-icons";
+import { StatusBar } from "expo-status-bar";
 
 export default function TabLayout() {
 	const colorScheme = useColorScheme();
@@ -88,6 +89,7 @@ export default function TabLayout() {
 					}}
 				/>
 			</Tabs>
+			<StatusBar backgroundColor="#161622" style="light" />
 		</PaperProvider>
 	);
 }

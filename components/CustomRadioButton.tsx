@@ -16,6 +16,7 @@ const CustomRadioButton: React.FC<CustomRadioButtonProps> = ({
 		<View className="flex-row">
 			{options.map((option, index) => (
 				<TouchableOpacity
+					activeOpacity={0.7}
 					key={index}
 					className="flex-row items-center mr-4"
 					onPress={() => onSelect(option)}

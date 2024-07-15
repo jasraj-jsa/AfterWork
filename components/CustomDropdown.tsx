@@ -22,6 +22,7 @@ const CustomDropdown: React.FC<CustomDropdownProps> = ({
 	return (
 		<View className="border border-gray-300 rounded">
 			<TouchableOpacity
+				activeOpacity={0.7}
 				className="p-4 bg-white"
 				onPress={() => setIsDropdownOpen(!isDropdownOpen)}
 			>
