@@ -1,4 +1,10 @@
-import { Client, Account, ID } from "react-native-appwrite";
+import {
+	Client,
+	Account,
+	ID,
+	AppwriteException,
+	Models,
+} from "react-native-appwrite";
 
 export const config = {
 	endpoint: "https://cloud.appwrite.io/v1",
@@ -9,28 +15,20 @@ export const config = {
 	eventCollectionId: "6686a470003dc3363cc5",
 };
 
-type loginScreen = "Phone" | "Login";
+const client = new Client();
+client.setEndpoint(config.endpoint).setProject(config.projectId);
 
-export const handlePhoneLogin = async (
-	loginScreen: loginScreen,
-	phoneNo?: string,
-	userId?: string,
-	secret?: string
-) => {
-	const client = new Client();
-	client.setEndpoint(config.endpoint).setProject(config.projectId);
+const account = new Account(client);
 
-	const account = new Account(client);
-	if (loginScreen === "Phone") {
-		if (!phoneNo) throw console.error("No number provided!");
+export const sendOtp = async (phoneNo: string): Promise<string> => {
+	const token = await account.createPhoneToken(ID.unique(), `+91${phoneNo}`);
+	return token.userId;
+};
 
-		const token = await account.createPhoneToken(ID.unique(), `+91${phoneNo}`);
-		return token.userId;
-	}
-	if (userId && secret) {
-		const session = await account.createSession(userId, secret);
-		return session;
-	} else {
-		throw console.error("Login Failed! User id and/or Secret not provided");
-	}
+export const verifyOtp = async (
+	userId: any,
+	secret: string
+): Promise<Models.Session> => {
+	const session = await account.createSession(userId, secret);
+	return session;
 };

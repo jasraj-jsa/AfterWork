@@ -6,12 +6,13 @@ import {
 	Image,
 	TextInput,
 	TouchableOpacity,
+	Alert,
 } from "react-native";
 import React, { useState } from "react";
 import FormComponent from "@/components/FormComponent";
 import { Entypo } from "@expo/vector-icons";
 import CustomButton from "@/components/CustomButton";
-import { handlePhoneLogin } from "@/lib/appwrite";
+import { sendOtp } from "@/lib/appwrite";
 import { router } from "expo-router";
 
 const SignIn = () => {
@@ -27,12 +28,19 @@ const SignIn = () => {
 	};
 	const submit = async () => {
 		setIsLoading(true);
-		router.push("/otp");
 
-		// if (/^\d*$/.test(phoneNo) && phoneNo.length === 10) {
-		// 	const userId = await handlePhoneLogin("Phone", phoneNo);
-		// }
-		// setIsLoading(false);
+		if (/^\d*$/.test(phoneNo) && phoneNo.length === 10) {
+			try {
+				// const userId = await sendOtp(phoneNo);
+				router.push({
+					pathname: "otp",
+					params: { phoneNo, userId: "1234567" },
+				});
+			} catch (err: any) {
+				Alert.alert("Request Failed", err);
+			}
+		}
+		setIsLoading(false);
 	};
 	return (
 		<SafeAreaView className="bg-primary h-full">
@@ -54,16 +62,16 @@ const SignIn = () => {
 						</Text>
 						<View className="border border-gray-400/70 flex-1"></View>
 					</View>
-					<View className="flex-row justify-center items-center mt-4 pr-4 mx-4 bg-white rounded-xl border">
+					<View className="flex-row justify-center items-center mt-5 pr-4 mx-4 bg-white rounded-xl border">
 						<TextInput
 							value="+91"
-							className="rounded-xl bg-gray-50 p-4"
+							className="rounded-xl bg-gray-50 p-4 text-[20px]"
 							readOnly={true}
 						/>
 
 						<TextInput
 							placeholder="Enter Mobile Number"
-							className="rounded-xl bg-gray-50 p-4 flex-1 pl-0"
+							className="rounded-xl bg-gray-50 p-4 flex-1 pl-0 text-[20px]"
 							inputMode="tel"
 							keyboardType="number-pad"
 							maxLength={10}
@@ -73,14 +81,14 @@ const SignIn = () => {
 						{phoneNo && (
 							<TouchableOpacity activeOpacity={0.8} onPress={clearPhoneNo}>
 								<Text>
-									<Entypo name="circle-with-cross" size={18} color="gray" />
+									<Entypo name="circle-with-cross" size={20} color="gray" />
 								</Text>
 							</TouchableOpacity>
 						)}
 					</View>
 					<CustomButton
 						title="Continue"
-						containerStyles="min-h-[55px] mt-4 mx-4"
+						containerStyles="min-h-[55px] mt-5 mx-4"
 						isLoading={isLoading}
 						handlePress={submit}
 					/>

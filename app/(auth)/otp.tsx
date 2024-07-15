@@ -4,19 +4,19 @@ import {
 	SafeAreaView,
 	TouchableOpacity,
 	TextInput,
+	ActivityIndicator,
+	Alert,
 } from "react-native";
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Ionicons } from "@expo/vector-icons";
-import { router } from "expo-router";
+import { router, useLocalSearchParams } from "expo-router";
+import { verifyOtp } from "@/lib/appwrite";
 
-interface OtpParams {
-	phoneNo: string;
-	userId: string;
-}
-
-const Otp: React.FC<OtpParams> = ({ phoneNo, userId }) => {
+const Otp = () => {
+	const { phoneNo, userId } = useLocalSearchParams();
 	const goBack = () => router.back();
-	const inputs = useRef([]);
+	const inputs: any = useRef([]);
+	const [isLoading, setIsLoading] = useState(false);
 	const [otp, setOtp] = useState(Array(6).fill(""));
 	const [focusedInput, setFoucsedInput] = useState(-1);
 	const handleKeyPress = (e: any, index: number) => {
@@ -33,14 +33,31 @@ const Otp: React.FC<OtpParams> = ({ phoneNo, userId }) => {
 			}
 		}
 	};
-	const handleOtpChange = (index: number, text: string) => {
+	const handleOtpChange = async (index: number, text: string) => {
+		setIsLoading(true);
 		if (/^\d*$/.test(text) && text.length === 1) {
 			let newOtp = [...otp];
 			newOtp[index] = text;
 			setOtp(newOtp);
 			if (index < 5) inputs.current[index + 1].focus();
+			else if (index == 5) {
+				try {
+					console.log(`OTP: ${newOtp.join("")}`);
+					console.log(`UserId: ${userId}`);
+					// const session = await verifyOtp(userId, otp.join(""));
+					router.push("/(tabs)");
+				} catch (err: any) {
+					setOtp(Array(6).fill(""));
+					inputs.current[0].focus();
+					Alert.alert("Request Failed", err.message);
+				}
+			}
 		}
+		setIsLoading(false);
 	};
+	useEffect(() => {
+		inputs.current[0].focus();
+	}, []);
 	return (
 		<SafeAreaView className="bg-primary h-full">
 			<View className="flex-row justify-center items-center space-x-3 ml-2 my-4">
@@ -90,6 +107,12 @@ const Otp: React.FC<OtpParams> = ({ phoneNo, userId }) => {
 						</View>
 					))}
 				</View>
+				{isLoading && (
+					<View className="mt-4 justify-center items-center">
+						<ActivityIndicator size="large" color="#3b82f6" />
+					</View>
+				)}
+
 				<Text className="text-white text-sm font-pmedium mt-8 text-center">
 					Didn't get the OTP?
 				</Text>
