@@ -52,7 +52,7 @@ export default function TabLayout() {
 				<Tabs.Screen
 					name="(createEvent)"
 					options={{
-						title: "Create",
+						title: "Schedule",
 						headerShown: false,
 						tabBarIcon: ({ color, focused }) => (
 							<TabBarIcon
@@ -63,9 +63,9 @@ export default function TabLayout() {
 					}}
 				/>
 				<Tabs.Screen
-					name="bookings"
+					name="fam"
 					options={{
-						title: "Bookings",
+						title: "Fam",
 						headerShown: false,
 						tabBarIcon: ({ color, focused }) => (
 							<TabBarIcon
@@ -76,9 +76,9 @@ export default function TabLayout() {
 					}}
 				/>
 				<Tabs.Screen
-					name="favourites"
+					name="bucketlist"
 					options={{
-						title: "Favourites",
+						title: "Bucket List",
 						headerShown: false,
 						tabBarIcon: ({ color, focused }) => (
 							<TabBarIcon

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Image, View, Text, ScrollView, TouchableOpacity } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
 
@@ -11,7 +11,20 @@ import EventData from "@/lib/data";
 
 export default function HomeScreen() {
 	const [location, setLocation] = useState("Whitefield");
+	const [loading, setLoading] = useState(false);
 	const [search, setSearch] = useState("");
+	// const [eventData, setEventData] = useState([]);
+	// useEffect(() => {
+	// 	(async () => {
+	// 		const response = await fetch(
+	// 			"https://api.venn.buzz/user/social_experiences.json?filter=all"
+	// 		);
+	// 		const events = (await response.json())["data"]["events"];
+	// 		setEventData(events);
+	// 		// setLoading(false);
+	// 	})();
+	// }, []);
+	if (loading) return <Text>Loading...</Text>;
 	return (
 		<SafeAreaView className="bg-primary h-full">
 			<ScrollView>
@@ -118,18 +131,19 @@ export default function HomeScreen() {
 						showsHorizontalScrollIndicator={false}
 						contentContainerStyle={{ justifyContent: "space-evenly", gap: 20 }}
 					>
-						{EventData.map((event, index) =>
-							event["display_section"] === "day" ? (
-								<EventCard
-									key={index}
-									imageUrl={event["small_image"]}
-									title={event["title"]}
-									location={event["venue"]["name"]}
-									date={event["event_date"]}
-									bookingUrl={event["shortened_link"]}
-								/>
-							) : null
-						)}
+						{EventData.length &&
+							EventData.map((event, index) =>
+								event["display_section"] === "day" ? (
+									<EventCard
+										key={index}
+										imageUrl={event["small_image"]}
+										title={event["title"]}
+										location={event["venue"]["name"]}
+										date={event["event_date"]}
+										bookingUrl={event["shortened_link"] as string}
+									/>
+								) : null
+							)}
 					</ScrollView>
 				</View>
 
@@ -149,18 +163,19 @@ export default function HomeScreen() {
 						showsHorizontalScrollIndicator={false}
 						contentContainerStyle={{ justifyContent: "space-evenly", gap: 20 }}
 					>
-						{EventData.map((event, index) =>
-							event["display_section"] === "later" ? (
-								<EventCard
-									key={index}
-									imageUrl={event["small_image"]}
-									title={event["title"]}
-									location={event["venue"]["name"]}
-									date={event["event_date"]}
-									bookingUrl={event["shortened_link"]}
-								/>
-							) : null
-						)}
+						{EventData.length &&
+							EventData.map((event, index) =>
+								event["display_section"] === "later" ? (
+									<EventCard
+										key={index}
+										imageUrl={event["small_image"]}
+										title={event["title"]}
+										location={event["venue"]["name"]}
+										date={event["event_date"]}
+										bookingUrl={event["shortened_link"] as string}
+									/>
+								) : null
+							)}
 					</ScrollView>
 				</View>
 			</ScrollView>

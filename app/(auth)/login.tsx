@@ -9,7 +9,6 @@ import {
 	Alert,
 } from "react-native";
 import React, { useState } from "react";
-import FormComponent from "@/components/FormComponent";
 import { Entypo } from "@expo/vector-icons";
 import CustomButton from "@/components/CustomButton";
 import { sendOtp } from "@/lib/appwrite";
@@ -34,7 +33,7 @@ const SignIn = () => {
 				// const userId = await sendOtp(phoneNo);
 				router.push({
 					pathname: "otp",
-					params: { phoneNo, userId: "1234567" },
+					params: { phoneNo, userId: "12312312323" },
 				});
 			} catch (err: any) {
 				Alert.alert("Request Failed", err);

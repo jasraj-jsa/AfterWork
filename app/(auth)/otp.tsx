@@ -45,6 +45,7 @@ const Otp = () => {
 					console.log(`OTP: ${newOtp.join("")}`);
 					console.log(`UserId: ${userId}`);
 					// const session = await verifyOtp(userId, otp.join(""));
+					router.dismissAll();
 					router.push("/(tabs)");
 				} catch (err: any) {
 					setOtp(Array(6).fill(""));

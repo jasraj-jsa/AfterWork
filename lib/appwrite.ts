@@ -4,9 +4,11 @@ import {
 	ID,
 	AppwriteException,
 	Models,
+	Databases,
+	Storage,
 } from "react-native-appwrite";
 
-export const config = {
+export const appwriteConfig = {
 	endpoint: "https://cloud.appwrite.io/v1",
 	platform: "com.afterwork.app",
 	projectId: "6685b51e0007381757d3",
@@ -16,19 +18,56 @@ export const config = {
 };
 
 const client = new Client();
-client.setEndpoint(config.endpoint).setProject(config.projectId);
+client
+	.setEndpoint(appwriteConfig.endpoint)
+	.setProject(appwriteConfig.projectId);
 
 const account = new Account(client);
+// const storage = new Storage(client);
+// const avatars = new Avatars(client);
+const databases = new Databases(client);
 
-export const sendOtp = async (phoneNo: string): Promise<string> => {
+export const sendOtp = async (
+	phoneNo: string,
+	account: Account
+): Promise<string> => {
 	const token = await account.createPhoneToken(ID.unique(), `+91${phoneNo}`);
 	return token.userId;
 };
 
 export const verifyOtp = async (
 	userId: any,
-	secret: string
+	secret: string,
+	account: Account
 ): Promise<Models.Session> => {
 	const session = await account.createSession(userId, secret);
 	return session;
 };
+
+export async function createEvent(event: any) {
+	try {
+		const newPost = await databases.createDocument(
+			appwriteConfig.databaseId,
+			appwriteConfig.eventCollectionId,
+			ID.unique(),
+			event
+		);
+
+		return newPost;
+	} catch (error: any) {
+		throw new Error(error);
+	}
+}
+
+export async function getAllEvents() {
+	try {
+		const posts = await databases.listDocuments(
+			appwriteConfig.databaseId,
+			appwriteConfig.eventCollectionId
+		);
+
+		return posts.documents;
+	} catch (error: any) {
+		throw new Error(error);
+	}
+}

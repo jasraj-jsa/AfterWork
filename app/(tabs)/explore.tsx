@@ -1,18 +1,9 @@
-import Ionicons from "@expo/vector-icons/Ionicons";
+
 import {
-	StyleSheet,
-	Image,
-	Platform,
 	View,
 	Text,
 	ScrollView,
 } from "react-native";
-
-import { Collapsible } from "@/components/Collapsible";
-import { ExternalLink } from "@/components/ExternalLink";
-import ParallaxScrollView from "@/components/ParallaxScrollView";
-import { ThemedText } from "@/components/ThemedText";
-import { ThemedView } from "@/components/ThemedView";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { Button, FAB, Searchbar, Switch, TextInput } from "react-native-paper";
 import { useState } from "react";
@@ -23,8 +14,6 @@ import Category from "@/components/Category";
 export default function TabTwoScreen() {
 	const [location, setLocation] = useState("Whitefield");
 	const [search, setSearch] = useState("");
-	const [isSwitchOn, setIsSwitchOn] = useState(false);
-	const onToggleSwitch = () => setIsSwitchOn(!isSwitchOn);
 
 	return (
 		<SafeAreaView className="bg-primary h-full">

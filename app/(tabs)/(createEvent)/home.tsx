@@ -11,7 +11,7 @@ import { router } from "expo-router";
 import { Entypo, FontAwesome6, Octicons } from "@expo/vector-icons";
 
 const Home = () => {
-	const getStarted = () => router.push("details");
+	const getStarted = () => router.push("eventType");
 	return (
 		<SafeAreaView className="bg-primary h-full">
 			<ScrollView contentContainerStyle={{ padding: 20, alignItems: "center" }}>

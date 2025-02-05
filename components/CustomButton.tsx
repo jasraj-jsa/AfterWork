@@ -6,7 +6,7 @@ interface CustomButtonProps {
 	handlePress: () => void;
 	containerStyles?: string;
 	textStyles?: string;
-	isLoading: boolean;
+	isLoading?: boolean;
 }
 
 const CustomButton: React.FC<CustomButtonProps> = ({
@@ -14,7 +14,7 @@ const CustomButton: React.FC<CustomButtonProps> = ({
 	handlePress,
 	containerStyles,
 	textStyles,
-	isLoading,
+	isLoading = false,
 }) => {
 	return (
 		<TouchableOpacity

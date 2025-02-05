@@ -5,7 +5,7 @@ import { router } from "expo-router";
 
 const Home = () => {
 	const handleGetStarted = () => {
-		router.push("/login");
+		router.push("(tabs)");
 	};
 	return (
 		<SafeAreaView className="bg-primary h-full">
